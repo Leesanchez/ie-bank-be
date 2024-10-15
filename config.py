@@ -9,6 +9,7 @@ class Config(object):
 
 class LocalConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///local.db'
+    # Uncomment and configure for Postgres if needed:
     # SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
     # dbuser=os.getenv('DBUSER'),
     # dbpass=os.getenv('DBPASS'),
@@ -23,9 +24,13 @@ class GithubCIConfig(Config):
 
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
-    dbuser=os.getenv('DBUSER'),
-    dbpass=os.getenv('DBPASS'),
-    dbhost=os.getenv('DBHOST'),
-    dbname=os.getenv('DBNAME')
+        dbuser=os.getenv('DBUSER'),
+        dbpass=os.getenv('DBPASS'),
+        dbhost=os.getenv('DBHOST'),
+        dbname=os.getenv('DBNAME')
     )
     DEBUG = True
+
+class ProductionConfig(Config):  # Add this class for production
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///prod.db'  # Change to production database URI
+    DEBUG = False
