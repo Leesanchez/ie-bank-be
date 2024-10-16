@@ -1,6 +1,5 @@
-from iebank_api import app, db
+from iebank_api import app
+from flask import Flask
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()  # This ensures the database schema is created.
+if __name__ == "__main__":
     app.run(debug=True)
